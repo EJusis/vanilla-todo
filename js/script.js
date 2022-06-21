@@ -25,3 +25,10 @@ addForm.addEventListener('submit', e => {
     }
 
 })
+
+// delete todos
+list.addEventListener('click', e => {
+    if(e.target.classList.contains('bi-trash')) {
+        e.target.parentElement.remove()
+    }
+})
