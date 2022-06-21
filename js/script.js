@@ -1,5 +1,6 @@
 const addForm = document.querySelector('.add')
 const list = document.querySelector('.todos')
+const search = document.querySelector('.search input')
 
 const generateTemplate = todo => {
     const html = `
@@ -28,7 +29,24 @@ addForm.addEventListener('submit', e => {
 
 // delete todos
 list.addEventListener('click', e => {
-    if(e.target.classList.contains('bi-trash')) {
+    if (e.target.classList.contains('bi-trash')) {
         e.target.parentElement.remove()
     }
+})
+
+// Search and filter
+const filterTodos = (term) => {
+    Array.from(list.children)
+        .filter((todo) => !todo.textContent.includes(term))
+        .forEach((todo) => todo.classList.add('hidden'))
+
+    Array.from(list.children)
+        .filter((todo) => todo.textContent.includes(term))
+        .forEach((todo) => todo.classList.remove('hidden'))
+}
+
+search.addEventListener('keyup', e => {
+    e.preventDefault()
+    const term = search.value.trim()
+    filterTodos(term)
 })
